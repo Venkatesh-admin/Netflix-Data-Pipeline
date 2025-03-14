@@ -45,6 +45,7 @@ This project outlines a data pipeline using Azure Data Factory (ADF) and Databri
      - Add `Validation Activity`, `Web Activity` to fetch metadata, and `Set Variable Activity` to store the metadata.
 
 <img src="Diagarams_and_Workflows/1_ADF.png">
+
 <img src="Diagarams_and_Workflows/1.1_ADF.png">
 
 ### Databricks Setup
@@ -84,8 +85,14 @@ This project outlines a data pipeline using Azure Data Factory (ADF) and Databri
    - Define a workflow to move `netflix_titles` in bronze layer to silver layer with a condition that executes only if `workDay == 7`.
 
 <img src="Diagarams_and_Workflows/2.1_Silver_dim_workflow.png">
+
+
 <img src="Diagarams_and_Workflows/2.2_Silver_titles_workflow.png">
+
+
 <img src="Diagarams_and_Workflows/2.3_workflow_runs.png">
+
+
 <img src="Diagarams_and_Workflows/2.4_workflow_runs.png">
 
 
@@ -95,7 +102,9 @@ This project outlines a data pipeline using Azure Data Factory (ADF) and Databri
    - Define conditions and rules for Gold Layer processing using Delta Live Tables features.
 
 <img src="Diagarams_and_Workflows/3.1_Delta_live_table.png">
-<img src="Diagarams_and_Workflows/3.2_Delta_live_table.png">
+
+
+<img src="Diagarams_and_Workflows/3.2_Delta_Live_Tables.png">
 
 ## Additional Notes
 - **Study Autoloader Schema Evolution** to handle schema changes dynamically.
