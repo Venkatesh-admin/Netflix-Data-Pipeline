@@ -3,6 +3,8 @@
 ## Project Overview
 This project outlines a data pipeline using Azure Data Factory (ADF) and Databricks for data ingestion, transformation, and processing across different storage layers: Raw, Bronze, Silver, and Gold.
 
+<img src="Diagarams_and_Workflows/architecture.png">
+
 ## Steps to Implement
 
 ### Azure Data Factory (ADF) Setup
@@ -42,6 +44,9 @@ This project outlines a data pipeline using Azure Data Factory (ADF) and Databri
    - **Validation and Metadata Extraction**:
      - Add `Validation Activity`, `Web Activity` to fetch metadata, and `Set Variable Activity` to store the metadata.
 
+<img src="Diagarams_and_Workflows/1_ADF.png">
+<img src="Diagarams_and_Workflows/1.1_ADF.png">
+
 ### Databricks Setup
 1. **Create a Databricks Account**:
    - Use a trial premium account for setup.
@@ -59,26 +64,38 @@ This project outlines a data pipeline using Azure Data Factory (ADF) and Databri
 
 5. **Connect to Azure Databricks Workspace**.
 
-6. **Create a Catalog and External Storage**:
+6. **Create a Catalog and schema and External Storage for all the layers**:
    - Attach credentials using the Access Connector Resource ID.
 
-### Implementing Autoloader and Schema Evolution
+
+
+### Implementing Workflows in AzureDatabricks
 1. **Create an Autoloader Notebook**:
-   - Configure it to automatically read cloud streams and write to the Bronze layer.
+   - Configure it to automatically read the raw layer title cloud data streams and write to the Bronze layer.
 
 2. **Implement Silver Layer Transformation**:
-   - Create a Silver notebook to move data from Bronze to Silver.
+   - Create a Silver notebook to move other data which is saved in bronze layer using ADF for each activity pipeline to Silver.
    - Create a Lookup Array Notebook to dynamically fetch source and target folder names using `dbutils.widgets` and `taskValues`.
 
 3. **Set Up Workflows in Databricks**:
    - Create an **Iterative Task** for the Silver Notebook.
    - Use `taskValues` for iteration and parameter passing.
    - Implement a **Lookup Task** to pass folder names to `silver_dim` notebooks.
-   - Define a workflow to transform `netflix_titles` with a condition that executes only if `workDay == 7`.
+   - Define a workflow to move `netflix_titles` in bronze layer to silver layer with a condition that executes only if `workDay == 7`.
+
+<img src="Diagarams_and_Workflows/2.1_Silver_dim_workflow.png">
+<img src="Diagarams_and_Workflows/2.2_Silver_titles_workflow.png">
+<img src="Diagarams_and_Workflows/2.3_workflow_runs.png">
+<img src="Diagarams_and_Workflows/2.4_workflow_runs.png">
+
+
 
 4. **Create Delta Live Tables (DLT) Pipeline**:
    - Use **Job Clusters** instead of All-Purpose Clusters.
    - Define conditions and rules for Gold Layer processing using Delta Live Tables features.
+
+<img src="Diagarams_and_Workflows/3.1_Delta_live_table.png">
+<img src="Diagarams_and_Workflows/3.2_Delta_live_table.png">
 
 ## Additional Notes
 - **Study Autoloader Schema Evolution** to handle schema changes dynamically.
