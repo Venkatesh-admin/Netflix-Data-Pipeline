@@ -1,7 +1,9 @@
-# Azure Data Factory and Databricks Pipeline Project
+# Netflix Data Pipeline using ADF, DataBricks Workflows, Delta Live Tables 
 
 ## Project Overview
 This project outlines a data pipeline using Azure Data Factory (ADF) and Databricks for data ingestion, transformation, and processing across different storage layers: Raw, Bronze, Silver, and Gold.
+
+### Architecture Diagram
 
 <img src="Diagarams_and_Workflows/architecture.png">
 
