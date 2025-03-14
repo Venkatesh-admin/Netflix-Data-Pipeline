@@ -46,6 +46,8 @@ This project outlines a data pipeline using Azure Data Factory (ADF) and Databri
    - **Validation and Metadata Extraction**:
      - Add `Validation Activity`, `Web Activity` to fetch metadata, and `Set Variable Activity` to store the metadata.
 
+### ADF Pipeline
+
 <img src="Diagarams_and_Workflows/1_ADF.png">
 
 <img src="Diagarams_and_Workflows/1.1_ADF.png">
@@ -86,6 +88,8 @@ This project outlines a data pipeline using Azure Data Factory (ADF) and Databri
    - Implement a **Lookup Task** to pass folder names to `silver_dim` notebooks.
    - Define a workflow to move `netflix_titles` in bronze layer to silver layer with a condition that executes only if `workDay == 7`.
 
+### DataBricks Workflows
+
 <img src="Diagarams_and_Workflows/2.1_Silver_dim_workflow.png">
 
 
@@ -102,6 +106,9 @@ This project outlines a data pipeline using Azure Data Factory (ADF) and Databri
 4. **Create Delta Live Tables (DLT) Pipeline**:
    - Use **Job Clusters** instead of All-Purpose Clusters.
    - Define conditions and rules for Gold Layer processing using Delta Live Tables features.
+
+
+### Delta Live Tables
 
 <img src="Diagarams_and_Workflows/3.1_Delta_live_table.png">
 
