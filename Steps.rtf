@@ -1,0 +1,46 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Steps\
+\
+1.create a resource group\
+2.create storage account under that resource group and enable heirarachial namespace\
+3.create containers raw, silver,bronze,gold containers\
+3.create an adf resource \
+4.Go to linked services and create a linked service and under datasource select http to extract the raw data\
+5.create a linked service by selecting datasource data lake to store the raw data\
+6.Go to Author select pipeline and drag a copy activity and name it and start defining source and sink\
+6.1. For source for defining dataset select the http and then use  advance options to create parameters dynamic feature to get the file names dynamically in relative url\
+6.2 For sink for defining dataset select data lake storage and select bronze folder and use advance option to create parameters folder_name and file_name and use them as dynamic\
+7.create for each activity ands create array with of folder_names and file_names in the pipeline parameters\
+8.cut the copy activity and paste it in the foreach activity and now get the dynamic variables for the folder_name and file_name from for each list\
+9.create validation activity and also web activity to get metadata and set variable activity to store the the metadata output\
+\
+\
+Databricks\
+1.create a Databricks account with trial premium\
+2.connect with admin console by providing Microsoft extra id\
+3.create a metastore(only one metstore per region is allowed)\
+4.create access connector to connect Databricks with data lake storage\
+ And Assign role in IAM of storage account and attach the member as access connector created\
+5.connect to the azure workspace created\
+6.create the catalog and add external storage	by attaching credentials using access connector resource id\
+\
+\
+**** study about autoloader schema evolution\
+1.Create autoloader notebook to automatically read cloud stream and write it into the  bronze layer\
+2.Now create a silver notebook to move the data from bronze layer to silver layer and create the lookup array notebook to get the source and target folder_name dynamically(use dbutils widgets and taskValues)\
+4.Navigate to workflows\
+3.Create a iterative task for the silver notebook and use the taskValues to get into iterator and pass to silver notebook\
+4.crate a lookup task to pass the folder names to silver_dim notebooks\
+5.create another workflow to run transformations on the netflix_titles and run by putting condition such that if workDay is 7\
+6. Create delta live table pipeline by using the job cluster instead of all purpose and with conditions and rules defined for gold layer data using delta live table features\
+\
+\
+\
+\
+}
